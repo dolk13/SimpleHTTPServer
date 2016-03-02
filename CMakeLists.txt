@@ -12,8 +12,15 @@ endif()
 
 include_directories(${Boost_INCLUDE_DIRS}) 
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -pthread")
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp 
+	connection.cpp 
+	connection_manager.cpp 
+	mime_types.cpp
+	reply.cpp
+	request_handler.cpp
+	request_parser.cpp
+	server.cpp )
 add_executable(final ${SOURCE_FILES})
 target_link_libraries(final ${Boost_LIBRARIES})

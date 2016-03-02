@@ -5,6 +5,7 @@
 #include <stdio.h>
 
 #include <boost/asio.hpp>
+#include "server.h"
 
 using namespace std;
 
@@ -12,7 +13,8 @@ int main(int argc, char** argv) {
     cout << "Hello, World!" << endl;
     std::string ip;
     std::string path;
-    int port = 0;
+//    int port = 0;
+    std::string port;
     int option = 0;
     while ((option = getopt(argc, argv, "h:p:d:")) != -1)
     {
@@ -22,7 +24,7 @@ int main(int argc, char** argv) {
                 break;
             }
             case 'p' : {
-                port = atoi(optarg);
+                port = optarg;
                 break;
             }
             case 'd' : {
@@ -52,6 +54,9 @@ int main(int argc, char** argv) {
     close(STDOUT_FILENO);
     close(STDERR_FILENO);
 
-    pause();
+	http::server::server s(ip, port, path);
+	s.run();
+
+//    pause();
     return 0;
 }
