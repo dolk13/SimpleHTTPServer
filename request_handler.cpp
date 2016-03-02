@@ -47,6 +47,10 @@ void request_handler::handle_request(const request& req, reply& rep)
     extension = request_path.substr(last_dot_pos + 1);
   }
 
+	auto find = request_path.find_first_of('?');
+	if (find != std::string::npos)
+		request_path.erase(find);
+
   // Open the file to send back.
   std::string full_path = doc_root_ + request_path;
   std::ifstream is(full_path.c_str(), std::ios::in | std::ios::binary);
